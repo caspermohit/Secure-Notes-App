@@ -28,6 +28,6 @@ RUN composer install --no-dev --optimize-autoloader
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 
-# Expose port 8000 and start Laravel server
-EXPOSE 8000
+# Expose port 8000 and start the Laravel server
+EXPOSE 8000 8001
 CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8000
