@@ -47,7 +47,11 @@
             "@php artisan key:generate --ansi"
         ],
         "build-frontend": [
-            "cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/"
+            "cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/",
+            "php artisan key:generate --force",
+            "php artisan config:cache",
+            "php artisan route:cache",
+            "php artisan view:cache"
         ]
     },
     "extra": {

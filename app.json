@@ -1,0 +1,36 @@
+{
+  "name": "secure-notes-manager",
+  "description": "A Laravel + React secure notes application",
+  "repository": "https://github.com/caspermohit/Secure-Notes-App",
+  "buildpacks": [
+    {
+      "url": "https://github.com/render-oss/heroku-buildpack-php#v240"
+    }
+  ],
+  "env": {
+    "APP_ENV": {
+      "value": "production"
+    },
+    "APP_DEBUG": {
+      "value": "false"
+    },
+    "DB_CONNECTION": {
+      "value": "pgsql"
+    },
+    "CACHE_DRIVER": {
+      "value": "file"
+    },
+    "SESSION_DRIVER": {
+      "value": "file"
+    },
+    "QUEUE_CONNECTION": {
+      "value": "sync"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
+} 
