@@ -2,7 +2,7 @@
   "name": "secure-notes-manager",
   "version": "1.0.0",
   "scripts": {
-    "build": "composer install --no-dev --optimize-autoloader && composer run build-frontend",
+    "build": "./build.sh",
     "start": "php artisan serve --host=0.0.0.0 --port=$PORT"
   },
   "engines": {
