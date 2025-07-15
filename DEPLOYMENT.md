@@ -16,9 +16,11 @@ This application is a Laravel backend with a React frontend that can be deployed
 
 2. **Configure the service**
    - **Name**: secure-notes-manager (or your preferred name)
-   - **Environment**: PHP
+   - **Environment**: PHP (this will be auto-detected from render.yml)
    - **Build Command**: `composer install --no-dev --optimize-autoloader && cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/`
    - **Start Command**: `php artisan serve --host=0.0.0.0 --port=$PORT`
+
+   **Note**: These settings are automatically configured via the `render.yml` file in the repository.
 
 3. **Set Environment Variables**
    - `APP_ENV`: production
@@ -41,11 +43,11 @@ This application is a Laravel backend with a React frontend that can be deployed
 
 5. **Deploy**
    - Click "Create Web Service"
-   - Render will automatically build and deploy your application
+   - Render will automatically build and deploy your application using the configuration in `render.yml`
 
 ## How it Works
 
-1. **Build Process**:
+1. **Build Process** (defined in render.yml):
    - Installs PHP dependencies via Composer
    - Installs Node.js dependencies for the React frontend
    - Builds the React app
@@ -58,9 +60,10 @@ This application is a Laravel backend with a React frontend that can be deployed
 
 ## Troubleshooting
 
-- **Build fails**: Check that all dependencies are properly specified in composer.json and package.json
+- **Build fails**: Check that all dependencies are properly specified in composer.json and frontend/package.json
 - **Database connection fails**: Verify your PostgreSQL environment variables
 - **React app doesn't load**: Check that the build process completed successfully and files were copied to public/
+- **Render still tries to run npm build**: Make sure you're using the `render.yml` configuration and not manually setting build commands
 
 ## Local Development
 
