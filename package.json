@@ -1,8 +1,0 @@
-{
-  "name": "secure-notes-manager",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "composer install --no-dev --optimize-autoloader && cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/",
-    "start": "php artisan serve --host=0.0.0.0 --port=$PORT"
-  }
-} 
