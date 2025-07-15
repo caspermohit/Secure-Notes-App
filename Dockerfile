@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
+    nodejs \
+    npm \
     && docker-php-ext-install pdo_pgsql pgsql pdo_mysql mbstring exif pcntl bcmath gd
 
 # Install Composer
@@ -24,6 +26,9 @@ COPY . /app
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Build React frontend
+RUN cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/
 
 # Set permissions for Laravel
 RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
