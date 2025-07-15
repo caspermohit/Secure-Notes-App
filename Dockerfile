@@ -11,9 +11,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    nodejs \
-    npm \
     && docker-php-ext-install pdo_pgsql pgsql pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Node.js 22
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
 
 # Install Composer
 COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
@@ -24,8 +26,15 @@ WORKDIR /app
 # Copy existing application directory contents
 COPY . /app
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Make build script executable
+RUN chmod +x build.sh
+
+# Set environment variables to handle Composer issues
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_PROCESS_TIMEOUT=600
+
+# Install PHP dependencies with timeout handling
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
 # Build React frontend
 RUN cd frontend && npm install && npm run build && cd .. && cp -r frontend/build/* public/
